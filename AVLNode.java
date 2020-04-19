@@ -48,7 +48,7 @@ public class AVLNode {
     
     // Param: AVLNode rt
     // Returns : String representation of tree root at rt
-    //Note to self - toString is done in pre-order traversal format
+    //Note to self - toString is done in pre-order traversal
     private String toString(AVLNode rt) {
         if (rt == null)
             return "";
@@ -105,5 +105,14 @@ public class AVLNode {
     private AVLNode doubleRotateRightLeft(AVLNode rt) {
         // stub
         return rt;
+    }
+
+    /**
+     * Method: Helper method to assign heights to nodes, original code did 
+     * not contain a method to update the height of inserted nodes.
+     * @param root the node we are currently inserting or traversing
+     */
+    private void updateHeight(Node root){
+        root.height = 1 + Math.max(height(left), height(right));
     }
 }
