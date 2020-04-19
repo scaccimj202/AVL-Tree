@@ -115,4 +115,16 @@ public class AVLNode {
     private void updateHeight(AVLNode root){
         root.height = 1 + Math.max(height(left), height(right));
     }
+
+    /**
+     * Method takes the root node and caluclates the balance factor for the 
+     * left and right subtrees, returning either 0 if root is null or the 
+     * differnce of left - right subtree height.
+     * @param root the node whos subtrees we will be checking 
+     * @return either 0 or the differnce of the left and right subtree heights
+     */
+    private int getBalanceFactor(AVLNode root){
+        if(root == null) return 0;
+        else return (height(root.left) - height(root.right));
+    }
 }
