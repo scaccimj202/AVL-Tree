@@ -48,6 +48,7 @@ public class AVLNode {
     
     // Param: AVLNode rt
     // Returns : String representation of tree root at rt
+    //Note to self - toString is done in pre-order traversal format
     private String toString(AVLNode rt) {
         if (rt == null)
             return "";
