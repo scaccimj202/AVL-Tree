@@ -72,14 +72,41 @@ public class AVLNode {
 /////////////////////////////////////////////////////////////////////
 // Implement the next 5 methods
 /////////////////////////////////////////////////////////////////////
-    
-    // Param: AVLNode - rt - node to check for balance
-    // Returns: new root of this subtree after balancing
+    /**
+     * Method balances a tree post insertion: takes a node, checks the 
+     * balance factor, decides from there what action to take. 
+     * @param rt node where the balance factor will be tested
+     * @return the new root of this tree/subtree or the unchanged root
+     */
     private AVLNode balance (AVLNode rt) {
        if (rt == null)
             return rt;
-        // Write the code here to handle the different cases that
-        // will use the 4 rotations
+        updateHeight(rt);
+        /**
+         * Recall balance factor is calculated as: 
+         * height of left subtree - hight of right subtree
+         */
+        int balanceFactor = getBalanceFactor(rt);
+        /**
+        * If we have a negative number we have a right leaning tree
+        */
+        if(balanceFactor < -1){
+            if(height(rt.right.right) > height(rt.right.left)){
+                rotateLeft(rt);
+            }else{
+                doubleRotateRightLeft(rt);
+            }
+        }       
+        /**
+        * If we have a positive number we have a left leaning tree
+        */
+        else if( balanceFactor > 1){
+            if(height(rt.left.left) > height(rt.left.right)){
+                rotateRight(rt);
+            }else{
+                doubleRotateLeftRight(rt);
+            }
+        }
         return rt;
     }
     
