@@ -111,13 +111,13 @@ public class AVLNode {
     }
     
     private AVLNode doubleRotateLeftRight(AVLNode rt) {
-        // stub
-        return rt;
+        rt.right = rotateRight(rt.right);
+        return rotateLeft(rt);
     }
     
     private AVLNode doubleRotateRightLeft(AVLNode rt) {
-        // stub
-        return rt;
+        rt.left = rotateLeft(rt.left);
+        return rotateRight(rt);
     }
 
     /**
