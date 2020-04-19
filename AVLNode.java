@@ -83,18 +83,31 @@ public class AVLNode {
         return rt;
     }
     
-    // Param: AVLNode rt
-    // Returns: new root after single rotation of this rt right
+    /**
+     * Method for rotating right case, juggles pointers to rebalance right
+     * @param rt AVL node
+     * @return temp new root after single rotation of this rt left
+     */
     private AVLNode rotateRight(AVLNode rt) {
-        // stub
-        return rt;
+        AVLNode temp = rt.left;
+        rt.left = temp.right;
+        temp.right = rt;
+        updateHeight(rt);
+        updateHeight(temp);
+        return temp;
     }
-    
-    // Param: AVLNode rt
-    // Returns: new root after single rotation of this rt left
+    /**
+     * Method for rotating left case, juggles pointers to rebalance left
+     * @param rt AVL node
+     * @return temp new root after single rotation of this rt left
+     */
     private AVLNode rotateLeft(AVLNode rt) {
-        // stub
-        return rt;
+        AVLNode temp = rt.right;
+        rt.right = temp.left;
+        temp.left = rt;
+        updateHeight(rt);
+        updateHeight(temp);
+        return temp;
     }
     
     private AVLNode doubleRotateLeftRight(AVLNode rt) {
