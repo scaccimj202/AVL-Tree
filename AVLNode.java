@@ -112,7 +112,7 @@ public class AVLNode {
      * not contain a method to update the height of inserted nodes.
      * @param root the node we are currently inserting or traversing
      */
-    private void updateHeight(Node root){
+    private void updateHeight(AVLNode root){
         root.height = 1 + Math.max(height(left), height(right));
     }
 }
