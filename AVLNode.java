@@ -38,6 +38,11 @@ public class AVLNode {
         else if (value > rt.data)
             rt.right = insert(value, rt.right);
         // else this is a duplicate, do nothing
+        /*
+        System.out.println("ToString prior to balance: " + rt.toString());
+        System.out.println("Prior to balance rt value: " + rt.data);
+        */
+        System.out.println("Value being inserted: " + value);
         return balance(rt);
     }
     
@@ -82,6 +87,9 @@ public class AVLNode {
        if (rt == null)
             return rt;
         updateHeight(rt);
+        System.out.println("Data being traversed: " + rt.data);
+        System.out.println("Data height: " + rt.height);
+
         /**
          * Recall balance factor is calculated as: 
          * height of left subtree - hight of right subtree
@@ -91,20 +99,22 @@ public class AVLNode {
         * If we have a negative number we have a right leaning tree
         */
         if(balanceFactor < -1){
+            System.out.println("Data being balanced right: " + rt.data);
             if(height(rt.right.right) > height(rt.right.left)){
-                rotateLeft(rt);
+                rt = rotateLeft(rt);
             }else{
-                doubleRotateRightLeft(rt);
+                rt = doubleRotateRightLeft(rt);
             }
         }       
         /**
         * If we have a positive number we have a left leaning tree
         */
         else if( balanceFactor > 1){
+            System.out.println("Data being balanced left: " + rt.data);
             if(height(rt.left.left) > height(rt.left.right)){
-                rotateRight(rt);
+                rt = rotateRight(rt);
             }else{
-                doubleRotateLeftRight(rt);
+                rt = doubleRotateLeftRight(rt);
             }
         }
         return rt;
@@ -119,7 +129,7 @@ public class AVLNode {
         AVLNode temp = rt.left;
         rt.left = temp.right;
         temp.right = rt;
-        updateHeight(rt);
+        updateHeight(temp.right);
         updateHeight(temp);
         return temp;
     }
@@ -132,19 +142,20 @@ public class AVLNode {
         AVLNode temp = rt.right;
         rt.right = temp.left;
         temp.left = rt;
-        updateHeight(rt);
+        updateHeight(temp.left);
         updateHeight(temp);
         return temp;
     }
     
     private AVLNode doubleRotateLeftRight(AVLNode rt) {
-        rt.right = rotateRight(rt.right);
-        return rotateLeft(rt);
+        rt.left = rotateLeft(rt.left);
+        return rotateRight(rt);
+
     }
     
     private AVLNode doubleRotateRightLeft(AVLNode rt) {
-        rt.left = rotateLeft(rt.left);
-        return rotateRight(rt);
+        rt.right = rotateRight(rt.right);
+        return rotateLeft(rt);
     }
 
     /**
@@ -153,7 +164,7 @@ public class AVLNode {
      * @param root the node we are currently inserting or traversing
      */
     private void updateHeight(AVLNode root){
-        root.height = 1 + Math.max(height(left), height(right));
+        root.height = 1 + Math.max(height(root.left), height(root.right));
     }
 
     /**
