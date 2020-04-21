@@ -80,8 +80,10 @@ public class AVLNode {
  */
 
     /**
-     * Method balances a tree post insertion: takes a node, checks the 
-     * balance factor, decides from there what action to take. 
+     * Method balances a tree post insertion: takes a node, updates the height
+     * of the node, checks the balance factor of the subtree, and depending
+     * on the value of the balance factor, will follow through with one of four
+     * rotation cases for a balance.
      * @param rt node where the balance factor will be tested
      * @return the new root of this tree/subtree or the unchanged root
      */
