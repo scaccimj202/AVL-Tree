@@ -138,12 +138,26 @@ public class AVLNode {
         return temp;
     }
     
+    /**
+     * Method for doing a Left Right rotation, does a left
+     * rotation on the child node followed by a right rotation
+     * on the grandchild node
+     * @param rt the grandparent node we are rotating about
+     * @return rt the node we have done a rotation about
+     */
     private AVLNode doubleRotateLeftRight(AVLNode rt) {
         rt.left = rotateLeft(rt.left);
         return rotateRight(rt);
 
     }
     
+    /**
+     * Method for doing a Right Left rotation, does a right
+     * rotation on the child node followed by a left rotation
+     * on the grandchild node
+     * @param rt the grandparent node we are rotating about
+     * @return rt the node we have done a rotation about
+     */    
     private AVLNode doubleRotateRightLeft(AVLNode rt) {
         rt.right = rotateRight(rt.right);
         return rotateLeft(rt);
