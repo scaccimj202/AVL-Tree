@@ -109,7 +109,7 @@ public class AVLClient {
      */
     private static void runExperiment(int[] variables, PrintStream BST, 
     PrintStream AVL){
-        for(int round = 0; round <= variables.length; round++){
+        for(int round = 0; round < variables.length; round++){
             BST.println(testBST(variables[round]) + "\t " + variables[round]);
             AVL.println(testAVL(variables[round]) + "\t " + variables[round]);
         }
