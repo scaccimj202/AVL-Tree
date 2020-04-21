@@ -10,8 +10,7 @@ import java.io.*;
 public class AVLClient {
     public static void main (String [] args) throws FileNotFoundException {
         int[] variables = makeVariables();
-        for(int i = 0; i < variables.length; i++)
-            System.out.println(variables[i]);
+        viewVariables(variables);
         /*
         int variable = 23500;
         System.out.println("Adding 1 - " + variable + " in order,");
@@ -36,6 +35,15 @@ public class AVLClient {
         System.out.println("Time difference(BST-AVL):" + (totalTime-atotalTime));
         */
     }
+    /**
+     * Method displays the current variables to be tested
+     * @param variables_ the array of variables
+     */
+    private static void viewVariables(int[] variables_){
+        for(int i = 0; i < variables_.length; i++)
+            System.out.println(variables_[i]);
+    }
+
     /**
      * Method generates the variables used in the experiment and stores 
      * them in an integer array. 
