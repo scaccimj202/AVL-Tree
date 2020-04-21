@@ -141,7 +141,7 @@ public class AVLNode {
     /**
      * Method for doing a Left Right rotation, does a left
      * rotation on the child node followed by a right rotation
-     * on the grandchild node
+     * on the grandparent node
      * @param rt the grandparent node we are rotating about
      * @return rt the node we have done a rotation about
      */
@@ -154,7 +154,7 @@ public class AVLNode {
     /**
      * Method for doing a Right Left rotation, does a right
      * rotation on the child node followed by a left rotation
-     * on the grandchild node
+     * on the grandparent node
      * @param rt the grandparent node we are rotating about
      * @return rt the node we have done a rotation about
      */    
