@@ -164,9 +164,9 @@ public class AVLNode {
     }
 
     /**
-     * Method: Helper method to assign heights to nodes, original code did 
-     * not contain a method to update the height of inserted nodes.
-     * @param root the node we are currently inserting or traversing
+     * Method: sets the height of the current node to the
+     * maximum value of it's two subtrees 
+     * @param root the node we are currently traversing
      */
     private void updateHeight(AVLNode root){
         root.height = 1 + Math.max(height(root.left), height(root.right));
