@@ -9,56 +9,11 @@ import java.io.*;
 
 public class AVLClient {
     public static void main (String [] args) throws FileNotFoundException {
-        
-        // Here we construct a BST and then print it for sanity testing
+        int[] variables = makeVariables();
+        for(int i = 0; i < variables.length; i++)
+            System.out.println(variables[i]);
         /*
-        BSTNode bstroot = new BSTNode(10);
-        bstroot = bstroot.insert(8, bstroot);
-        bstroot = bstroot.insert(12, bstroot);
-        System.out.println(bstroot.height);
-        System.out.println(bstroot);
-        */
-        /* Original Code
-        // Here we construct a AVL Tree and then print it
-        AVLNode root = new AVLNode(10);
-        root = root.insert(8, root);
-        root = root.insert(12, root);
-        // Please note the the height reported is really the depth
-        // of the tree from the root. Until the balancing algorithm
-        // is implemented this value will be incorrect. The value
-        // shown will be 1 less than the actual height.
-        System.out.println(root.height);
-        System.out.println(root);
-        */
-        /*
-        // Visual Algo Test: Passed 4/19/20: 9:05PM
-        AVLNode root = new AVLNode(12);
-        root = root.insert(2, root);
-        root = root.insert(42, root);
-        root = root.insert(4, root);
-        root = root.insert(14, root);
-        root = root.insert(31, root);
-        root = root.insert(8, root);
-        root = root.insert(3, root);
-        root = root.insert(25, root);
-        root = root.insert(30, root);
-        root = root.insert(26, root);
-        root = root.insert(27, root);
-        root = root.insert(29, root);
-        root = root.insert(67, root);
-        root = root.insert(90, root);
-        root = root.insert(99, root);
-        root = root.insert(88, root);
-        root = root.insert(96, root);
-        // Please note the the height reported is really the depth
-        // of the tree from the root. Until the balancing algorithm
-        // is implemented this value will be incorrect. The value
-        // shown will be 1 less than the actual height.
-        System.out.println("Root height: " + root.height);
-        System.out.println(root.toString());
-        */
-        //Test of N values added 1 - 100 in order
-        int variable = 10000;
+        int variable = 23500;
         System.out.println("Adding 1 - " + variable + " in order,");
         long startTime = System.currentTimeMillis();
         BSTNode bstroot = new BSTNode(1);
@@ -79,5 +34,31 @@ public class AVLClient {
         System.out.println("Total time for BST: " + totalTime);
         System.out.println("Total time for AVL: " + atotalTime);
         System.out.println("Time difference(BST-AVL):" + (totalTime-atotalTime));
+        */
+    }
+    /**
+     * Method generates the variables used in the experiment and stores 
+     * them in an integer array. 
+     * Note: Due to the hardware being tested on 
+     * I have chosen to stop the maximum variable size at 23,500 as opposed
+     * to the original 25000.
+     * @return variables an integer array of values
+     */
+    private static int[] makeVariables(){
+        int[] variables = new int[10];
+        variables[0] = 100;
+        variables[1] = 500;
+        variables[2] = 1000;
+        int iterator = 3;
+        for(int i = 2500; i < 10000; i+= 2500){
+            variables[iterator] = i;
+            iterator++;
+        }
+        for(int i = 10000; i <= 20000; i+= 5000){
+            variables[iterator] = i;
+            iterator++;
+        }
+        variables[iterator] = 23500;
+        return variables;
     }
 }
