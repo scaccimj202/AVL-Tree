@@ -72,6 +72,13 @@ public class AVLNode {
 /////////////////////////////////////////////////////////////////////
 // Implement the next 5 methods
 /////////////////////////////////////////////////////////////////////
+/**
+ * @author Matthew Scaccia
+ * course: CIS303
+ * @since 4/19/20
+ * assignment: 5b AVL Tree Balancing
+ */
+
     /**
      * Method balances a tree post insertion: takes a node, checks the 
      * balance factor, decides from there what action to take. 
