@@ -25,7 +25,6 @@ public class AVLClient {
     }
 
 
-
     /**
      * Method displays the current variables to be tested
      * @param variables_ the array of variables
@@ -69,5 +68,36 @@ public class AVLClient {
     private static File makeFile(String fileName_){
         File dir = new File("Experiment Data");
         return new File(dir, fileName_);
+    }
+
+    /**
+     * Method tests the worst case scenario for adding to a BST
+     * by adding all values(1 - variable) in sequental order.
+     * @param variable number of values to be inserted into the tree
+     * @return double the time it took to add in (variable) amount of values
+     */
+    private static double testBST(int variable){
+        long startTime = System.currentTimeMillis();
+        BSTNode bstroot = new BSTNode(1);;
+        for(int i = 1; i <= variable; i++)
+            bstroot = bstroot.insert(i, bstroot);
+        long endTime = System.currentTimeMillis();
+        return endTime - startTime;
+    }
+
+    /**
+     * Method tests the worst case scenario for adding to a BST
+     * by adding all values(1 - variable) in sequental order.
+     * @param variable number of values to be inserted into the tree
+     * @return double the time it took to add in (variable) amount of values
+
+     */
+    private static double testAVL(int variable){
+        long startTime = System.currentTimeMillis();
+        AVLNode root = new AVLNode(1);;
+        for(int i = 1; i <= variable; i++)
+            root = root.insert(i, root);
+        long endTime = System.currentTimeMillis();
+        return endTime - startTime;
     }
 }
