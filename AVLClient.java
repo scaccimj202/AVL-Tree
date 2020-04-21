@@ -20,7 +20,7 @@ public class AVLClient {
         int[] variables = makeVariables();
         if(debug == true) viewVariables(variables);
 
-        
+        runExperiment(variables, BST, AVL);
 
     }
 
@@ -99,5 +99,19 @@ public class AVLClient {
             root = root.insert(i, root);
         long endTime = System.currentTimeMillis();
         return endTime - startTime;
+    }
+
+    /**
+     * Method runs the experiment(timing insertion for BST vs AVL)
+     * @param variables the variable amount of values to be inserted per round
+     * @param BST the printstream we're writing the BST results to
+     * @param AVL the printstream we're writing the AVL results to
+     */
+    private static void runExperiment(int[] variables, PrintStream BST, 
+    PrintStream AVL){
+        for(int round = 0; round <= variables.length; round++){
+            BST.println(testBST(variables[round]) + "\t " + variables[round]);
+            AVL.println(testAVL(variables[round]) + "\t " + variables[round]);
+        }
     }
 }
