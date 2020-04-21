@@ -4,37 +4,24 @@
 // Fall 2018
 // Revised 19 October 2018, L. Grabowski
 /////////////////////////////////////////////////////////////////////
-import java.util.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.PrintStream;
 
 public class AVLClient {
     private static boolean debug = false;
     public static void main (String [] args) throws FileNotFoundException {
+
+        PrintStream BST = new PrintStream(makeFile("BST.txt"));
+        BST.println("Time \t Value of N");
+        PrintStream AVL = new PrintStream(makeFile("AVL.txt"));
+        AVL.println("Time \t Value of N");
+
         int[] variables = makeVariables();
         if(debug == true) viewVariables(variables);
-        /*
-        int variable = 23500;
-        System.out.println("Adding 1 - " + variable + " in order,");
-        long startTime = System.currentTimeMillis();
-        BSTNode bstroot = new BSTNode(1);
-        for(int i = 2; i <= variable; i++)
-            bstroot = bstroot.insert(i, bstroot);
-        //System.out.println(bstroot.toString());
-        long endTime = System.currentTimeMillis();
-        long totalTime = endTime-startTime;
 
-        long astartTime = System.currentTimeMillis();
-        AVLNode root = new AVLNode(1);
-        for(int i = 2; i <= variable; i++)
-            root = root.insert(i, root);
-        //System.out.println(root.toString());
-        long aendTime = System.currentTimeMillis();
-        long atotalTime = aendTime-astartTime;
+        
 
-        System.out.println("Total time for BST: " + totalTime);
-        System.out.println("Total time for AVL: " + atotalTime);
-        System.out.println("Time difference(BST-AVL):" + (totalTime-atotalTime));
-        */
     }
 
 
@@ -72,5 +59,15 @@ public class AVLClient {
         }
         variables[iterator] = 23500;
         return variables;
+    }
+
+    /**
+     * Method makes a new file in the 'Experiment Data' sub directory
+     * @param fileName_ name of the file
+     * @return file to be written to
+     */
+    private static File makeFile(String fileName_){
+        File dir = new File("Experiment Data");
+        return new File(dir, fileName_);
     }
 }
