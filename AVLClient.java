@@ -7,10 +7,11 @@
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.PrintStream;
+import java.time.Instant;
 
 public class AVLClient {
     private static boolean debug = false;
-    public static void main (String [] args) throws FileNotFoundException {
+    public static void main (String [] args) throws FileNotFoundException, InterruptedException {
 
         PrintStream BST = new PrintStream(makeFile("BST.txt"));
         BST.println("Time \t Value of N");
@@ -20,10 +21,14 @@ public class AVLClient {
         int[] variables = makeVariables();
         if(debug == true) viewVariables(variables);
 
-        runExperiment(variables, BST, AVL);
+        //runExperiment(variables, BST, AVL);
 
+        for(int i = 0; i <10; i++)
+            System.out.println("AVL Time: " + testAVL(10000));
+
+        for(int i = 0; i <10; i++)
+            System.out.println("BST Time: " + testBST(10000));
     }
-
 
     /**
      * Method displays the current variables to be tested
@@ -76,28 +81,27 @@ public class AVLClient {
      * @param variable number of values to be inserted into the tree
      * @return double the time it took to add in (variable) amount of values
      */
-    private static double testBST(int variable){
-        long startTime = System.currentTimeMillis();
-        BSTNode bstroot = new BSTNode(1);;
-        for(int i = 1; i <= variable; i++)
+    private static long testBST(int variable){
+        long startTime = Instant.now().toEpochMilli();
+        BSTNode bstroot = new BSTNode(1);
+        for(int i = 2; i <= variable; i++)
             bstroot = bstroot.insert(i, bstroot);
-        long endTime = System.currentTimeMillis();
+        long endTime = Instant.now().toEpochMilli();
         return endTime - startTime;
     }
 
     /**
-     * Method tests the worst case scenario for adding to a BST
+     * Method tests the worst case scenario for adding to a AVL tree
      * by adding all values(1 - variable) in sequental order.
      * @param variable number of values to be inserted into the tree
      * @return double the time it took to add in (variable) amount of values
-
      */
-    private static double testAVL(int variable){
-        long startTime = System.currentTimeMillis();
-        AVLNode root = new AVLNode(1);;
-        for(int i = 1; i <= variable; i++)
-            root = root.insert(i, root);
-        long endTime = System.currentTimeMillis();
+    private static long testAVL(int variable){
+        long startTime = Instant.now().toEpochMilli();
+        AVLNode avlroot = new AVLNode(1);
+        for(int i = 2; i <= variable; i++)
+            avlroot = avlroot.insert(i, avlroot);
+        long endTime = Instant.now().toEpochMilli();
         return endTime - startTime;
     }
 

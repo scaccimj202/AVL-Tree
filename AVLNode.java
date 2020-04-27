@@ -91,7 +91,6 @@ public class AVLNode {
        if (rt == null)
             return rt;
         updateHeight(rt);
-
         /**
          * Recall balance factor is calculated as: 
          * height of left subtree - hight of right subtree
@@ -157,7 +156,6 @@ public class AVLNode {
     private AVLNode doubleRotateLeftRight(AVLNode rt) {
         rt.left = rotateLeft(rt.left);
         return rotateRight(rt);
-
     }
     
     /**
