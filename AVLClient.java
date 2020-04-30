@@ -1,121 +1,61 @@
-/////////////////////////////////////////////////////////////////////
-// AVLClient.java: skeleton client code for AVLNode class
-// CIS 303 Analysis of Algorithms
-// Fall 2018
-// Revised 19 October 2018, L. Grabowski
-/////////////////////////////////////////////////////////////////////
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.PrintStream;
-import java.time.Instant;
+
+/**
+ * 
+ * Client code to test the performance of AVL tree insertion against 
+ * BST insertion.
+ * 
+ * @author Matthew Scaccia
+ * @email scaccimj202@potsdam.edu
+ * course: CIS303
+ * @since 4/29/2020
+ * assignment: 5b AVL Tree Balancing
+ * @due 5/1/2020
+ */
 
 public class AVLClient {
-    private static boolean debug = false;
-    public static void main (String [] args) throws FileNotFoundException, InterruptedException {
+    public static void main (String [] args) {
+        
+        // Here we construct a BST and then print it for sanity testing
+        BSTNode bstroot = new BSTNode(10);
+        bstroot = bstroot.insert(8, bstroot);
+        bstroot = bstroot.insert(12, bstroot);
+        System.out.println(bstroot.height);
+        System.out.println(bstroot);
 
-        PrintStream BST = new PrintStream(makeFile("BST.txt"));
-        BST.println("Time \t Value of N");
-        PrintStream AVL = new PrintStream(makeFile("AVL.txt"));
-        AVL.println("Time \t Value of N");
-
-        int[] variables = makeVariables();
-        if(debug == true) viewVariables(variables);
-
-        //runExperiment(variables, BST, AVL);
-
-        for(int i = 0; i <10; i++)
-            System.out.println("AVL Time: " + testAVL(10000));
-
-        for(int i = 0; i <10; i++)
-            System.out.println("BST Time: " + testBST(10000));
-    }
-
-    /**
-     * Method displays the current variables to be tested
-     * @param variables_ the array of variables
-     */
-    private static void viewVariables(int[] variables_){
-        for(int i = 0; i < variables_.length; i++)
-            System.out.println(variables_[i]);
-    }
-
-    /**
-     * Method generates the variables used in the experiment and stores 
-     * them in an integer array. 
-     * Note: Due to the hardware being tested on 
-     * I have chosen to stop the maximum variable size at 23,500 as opposed
-     * to the original 25000.
-     * @return variables an integer array of values
-     */
-    private static int[] makeVariables(){
-        int[] variables = new int[10];
-        variables[0] = 100;
-        variables[1] = 500;
-        variables[2] = 1000;
-        int iterator = 3;
-        for(int i = 2500; i < 10000; i+= 2500){
-            variables[iterator] = i;
-            iterator++;
-        }
-        for(int i = 10000; i <= 20000; i+= 5000){
-            variables[iterator] = i;
-            iterator++;
-        }
-        variables[iterator] = 23500;
-        return variables;
-    }
-
-    /**
-     * Method makes a new file in the 'Experiment Data' sub directory
-     * @param fileName_ name of the file
-     * @return file to be written to
-     */
-    private static File makeFile(String fileName_){
-        File dir = new File("Experiment Data");
-        return new File(dir, fileName_);
-    }
-
-    /**
-     * Method tests the worst case scenario for adding to a BST
-     * by adding all values(1 - variable) in sequental order.
-     * @param variable number of values to be inserted into the tree
-     * @return double the time it took to add in (variable) amount of values
-     */
-    private static long testBST(int variable){
-        long startTime = Instant.now().toEpochMilli();
-        BSTNode bstroot = new BSTNode(1);
-        for(int i = 2; i <= variable; i++)
-            bstroot = bstroot.insert(i, bstroot);
-        long endTime = Instant.now().toEpochMilli();
-        return endTime - startTime;
-    }
-
-    /**
-     * Method tests the worst case scenario for adding to a AVL tree
-     * by adding all values(1 - variable) in sequental order.
-     * @param variable number of values to be inserted into the tree
-     * @return double the time it took to add in (variable) amount of values
-     */
-    private static long testAVL(int variable){
-        long startTime = Instant.now().toEpochMilli();
-        AVLNode avlroot = new AVLNode(1);
-        for(int i = 2; i <= variable; i++)
-            avlroot = avlroot.insert(i, avlroot);
-        long endTime = Instant.now().toEpochMilli();
-        return endTime - startTime;
-    }
-
-    /**
-     * Method runs the experiment(timing insertion for BST vs AVL)
-     * @param variables the variable amount of values to be inserted per round
-     * @param BST the printstream we're writing the BST results to
-     * @param AVL the printstream we're writing the AVL results to
-     */
-    private static void runExperiment(int[] variables, PrintStream BST, 
-    PrintStream AVL){
-        for(int round = 0; round < variables.length; round++){
-            BST.println(testBST(variables[round]) + "\t " + variables[round]);
-            AVL.println(testAVL(variables[round]) + "\t " + variables[round]);
-        }
+        // Here we construct a AVL Tree and then print it
+        AVLNode root = new AVLNode(10);
+        root = root.insert(8, root);
+        root = root.insert(12, root);
+        // shown will be 1 less than the actual height.
+        System.out.println(root.height);
+        System.out.println(root);
+        
+        
+        //Visual Algo Test: Passed 4/19/20: 9:05PM
+        root = new AVLNode(12);
+        root = root.insert(2, root);
+        root = root.insert(42, root);
+        root = root.insert(4, root);
+        root = root.insert(14, root);
+        root = root.insert(31, root);
+        root = root.insert(8, root);
+        root = root.insert(3, root);
+        root = root.insert(25, root);
+        root = root.insert(30, root);
+        root = root.insert(26, root);
+        root = root.insert(27, root);
+        root = root.insert(29, root);
+        root = root.insert(67, root);
+        root = root.insert(90, root);
+        root = root.insert(99, root);
+        root = root.insert(88, root);
+        root = root.insert(96, root);
+        // Please note the the height reported is really the depth
+        // of the tree from the root. Until the balancing algorithm
+        // is implemented this value will be incorrect. The value
+        // shown will be 1 less than the actual height.
+        System.out.println("Root height: " + root.height);
+        System.out.println(root.toString());
+        
     }
 }
